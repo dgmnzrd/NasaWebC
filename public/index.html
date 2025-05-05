@@ -5,13 +5,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>NasaWebC - Home</title>
-    <link rel="stylesheet" href="/css/main.css" />
+
+    <!-- Fuente Roboto desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind + Configuración para usar Roboto como font-sans -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- Tus estilos personalizados -->
+    <link rel="stylesheet" href="/css/main.css" />
 </head>
 
-<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
 
-    <!-- Header (se cargará desde /components/header.html) -->
+    <!-- Header (cargado dinámicamente) -->
     <div id="header"></div>
 
     <!-- Content + Sidebar wrapper -->
@@ -25,17 +43,18 @@
 
             <section id="apod-section" class="opacity-0 transition-opacity duration-700">
                 <h2 class="sr-only">Astronomy Picture of the Day</h2>
-                <!-- No image here anymore -->
             </section>
         </main>
 
-        <!-- Sidebar (inside relative wrapper) -->
-        <aside id="sidebar-apod" class="absolute top-0 right-0 h-full w-80 bg-white shadow-lg border-l border-gray-300 transform translate-x-full transition-transform duration-300 z-40 hover:translate-x-0 overflow-hidden flex flex-col">
+        <!-- Sidebar -->
+        <aside id="sidebar-apod"
+            class="absolute top-0 right-0 h-full w-80 bg-white shadow-lg border-l border-gray-300 transform translate-x-full transition-transform duration-300 z-40 hover:translate-x-0 overflow-hidden flex flex-col">
             <div class="flex flex-col flex-grow px-4 py-4 space-y-4 overflow-hidden">
                 <h2 class="text-lg font-semibold text-blue-800 border-b pb-2">Astronomy Picture of the Day</h2>
 
                 <div class="flex-shrink-0">
-                    <img id="sidebar-image" src="" alt="Astronomy Picture" class="cursor-zoom-in rounded-md shadow max-w-full max-h-52 w-auto object-contain border border-gray-200 mx-auto" />
+                    <img id="sidebar-image" src="" alt="Astronomy Picture"
+                        class="cursor-zoom-in rounded-md shadow max-w-full max-h-52 w-auto object-contain border border-gray-200 mx-auto" />
                 </div>
 
                 <div class="flex-grow overflow-auto min-h-0 pr-1">
@@ -49,12 +68,14 @@
 
     <!-- Modal para imagen ampliada -->
     <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[9999] hidden">
-        <img id="modalImage" src="" alt="Zoomed APOD" class="max-w-full max-h-[90vh] rounded shadow-lg border-4 border-white" />
+        <img id="modalImage" src="" alt="Zoomed APOD"
+            class="max-w-full max-h-[90vh] rounded shadow-lg border-4 border-white" />
     </div>
 
-    <!-- Footer (se cargará desde /components/footer.html) -->
+    <!-- Footer (cargado dinámicamente) -->
     <div id="footer"></div>
 
+    <!-- Scripts -->
     <script src="/js/main.js" defer></script>
     <script src="/js/ui.js" defer></script>
     <script src="/js/layout-loader.js" defer></script>
