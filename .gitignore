@@ -1,0 +1,23 @@
+# Archivos de compilación
+nasa_server
+*.o
+*.out
+*.log
+
+# Directorios temporales de build
+**/build/
+**/CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de entorno
+.env
+
+# Librerías externas clonadas (opcional, si no quieres versionarlas)
+libs/cJSON/
+libs/mongoose/
