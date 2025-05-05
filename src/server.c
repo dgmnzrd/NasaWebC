@@ -14,7 +14,7 @@ static void handle_request(struct mg_connection *c, int ev, void *ev_data) {
         if (mg_strcmp(hm->uri, mg_str("/apod")) == 0) {
             mg_http_reply(c, 200, "Content-Type: application/json\r\n", "{\"message\": \"Aquí irá el APOD\"}");
         } else {
-            struct mg_http_serve_opts opts = {.root_dir = "public/html"};
+            struct mg_http_serve_opts opts = {.root_dir = "public"};
             mg_http_serve_dir(c, hm, &opts);
         }
     }
