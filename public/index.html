@@ -11,56 +11,53 @@
 
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
-    <!-- Header -->
-    <header class="bg-blue-900 text-white py-4 shadow">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold">NasaWebC</h1>
-            <nav>
-                <ul class="flex gap-6 text-sm font-medium">
-                    <li><a href="index.html" class="hover:underline">Home</a></li>
-                    <li><a href="apod/apod.html" class="hover:underline">APOD</a></li>
-                    <li><a href="weather/weather.html" class="hover:underline">Space Weather</a></li>
-                    <li><a href="missions/missions.html" class="hover:underline">Missions</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Header (se cargará desde /components/header.html) -->
+    <div id="header"></div>
 
-    <!-- Main -->
-    <main class="flex-grow container mx-auto px-4 py-10">
-        <section class="intro mb-12">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-2">Explore space with real-time data</h2>
-            <p class="text-gray-700">This site uses NASA's API to display up-to-date space information.</p>
-        </section>
+    <!-- Content + Sidebar wrapper -->
+    <div class="relative flex-grow">
+        <!-- Main content -->
+        <main class="container mx-auto px-4 py-10">
+            <section class="intro mb-12">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Explore space with real-time data</h2>
+                <p class="text-gray-700">This site uses NASA's API to display up-to-date space information.</p>
+            </section>
 
-        <section id="apod-section" class="opacity-0 transition-opacity duration-700">
-            <h2 class="sr-only">Astronomy Picture of the Day</h2>
-            <!-- No image here anymore -->
-        </section>
-    </main>
+            <section id="apod-section" class="opacity-0 transition-opacity duration-700">
+                <h2 class="sr-only">Astronomy Picture of the Day</h2>
+                <!-- No image here anymore -->
+            </section>
+        </main>
 
-    <!-- Sidebar -->
-    <aside id="sidebar-apod"
-        class="fixed top-0 right-0 h-full w-80 bg-white shadow-lg border-l border-gray-300 transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto p-4 hover:translate-x-0">
-        <div class="flex flex-col space-y-4">
-            <h2 class="text-lg font-semibold text-blue-800 border-b pb-2">Astronomy Picture of the Day</h2>
-            <img id="sidebar-image" src="" alt="Astronomy Picture"
-                class="rounded-md shadow max-w-full object-cover border border-gray-200" />
-            <div>
-                <h3 id="sidebar-title" class="text-lg font-bold text-gray-900 mb-1"></h3>
-                <p id="sidebar-date" class="text-sm text-gray-500 mb-2"></p>
-                <p id="sidebar-explanation" class="text-sm text-gray-700 leading-relaxed text-justify"></p>
+        <!-- Sidebar (inside relative wrapper) -->
+        <aside id="sidebar-apod" class="absolute top-0 right-0 h-full w-80 bg-white shadow-lg border-l border-gray-300 transform translate-x-full transition-transform duration-300 z-40 hover:translate-x-0 overflow-hidden flex flex-col">
+            <div class="flex flex-col flex-grow px-4 py-4 space-y-4 overflow-hidden">
+                <h2 class="text-lg font-semibold text-blue-800 border-b pb-2">Astronomy Picture of the Day</h2>
+
+                <div class="flex-shrink-0">
+                    <img id="sidebar-image" src="" alt="Astronomy Picture" class="cursor-zoom-in rounded-md shadow max-w-full max-h-52 w-auto object-contain border border-gray-200 mx-auto" />
+                </div>
+
+                <div class="flex-grow overflow-auto min-h-0 pr-1">
+                    <h3 id="sidebar-title" class="text-lg font-bold text-gray-900 mb-1"></h3>
+                    <p id="sidebar-date" class="text-sm text-gray-500 mb-2"></p>
+                    <p id="sidebar-explanation" class="text-sm text-gray-700 leading-relaxed text-justify"></p>
+                </div>
             </div>
-        </div>
-    </aside>
+        </aside>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-200 text-center py-4 mt-auto">
-        <p class="text-sm text-gray-600">&copy; 2025 NasaWebC</p>
-    </footer>
+    <!-- Modal para imagen ampliada -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[9999] hidden">
+        <img id="modalImage" src="" alt="Zoomed APOD" class="max-w-full max-h-[90vh] rounded shadow-lg border-4 border-white" />
+    </div>
+
+    <!-- Footer (se cargará desde /components/footer.html) -->
+    <div id="footer"></div>
 
     <script src="/js/main.js" defer></script>
     <script src="/js/ui.js" defer></script>
+    <script src="/js/layout-loader.js" defer></script>
 </body>
 
 </html>

@@ -17,4 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
             sidebar.classList.add("translate-x-full");
         });
     }
+
+    const modal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage");
+    const sidebarImage = document.getElementById("sidebar-image");
+
+    if (sidebarImage && modal && modalImage) {
+        sidebarImage.addEventListener("click", () => {
+            modalImage.src = sidebarImage.src;
+            modal.classList.remove("hidden");
+        });
+
+        modal.addEventListener("click", () => {
+            modal.classList.add("hidden");
+            modalImage.src = "";
+        });
+    }
 });
