@@ -1,40 +1,66 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NasaWebC - Inicio</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NasaWebC - Home</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <header>
-        <h1>NasaWebC</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="apod/apod.html">Imagen del Día</a></li>
-                <li><a href="weather/weather.html">Clima Espacial</a></li>
-                <li><a href="missions/missions.html">Misiones</a></li>
-            </ul>
-        </nav>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-blue-900 text-white py-4 shadow">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">NasaWebC</h1>
+            <nav>
+                <ul class="flex gap-6 text-sm font-medium">
+                    <li><a href="index.html" class="hover:underline">Home</a></li>
+                    <li><a href="apod/apod.html" class="hover:underline">APOD</a></li>
+                    <li><a href="weather/weather.html" class="hover:underline">Space Weather</a></li>
+                    <li><a href="missions/missions.html" class="hover:underline">Missions</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="intro">
-            <h2>Explora el espacio con datos en tiempo real</h2>
-            <p>Este sitio utiliza la API de la NASA para mostrar información actualizada del universo.</p>
-            <button id="loadWelcome">Mostrar mensaje del backend</button>
-            <pre id="output"></pre>
+    <!-- Main -->
+    <main class="flex-grow container mx-auto px-4 py-10">
+        <section class="intro mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-2">Explore space with real-time data</h2>
+            <p class="text-gray-700">This site uses NASA's API to display up-to-date space information.</p>
+        </section>
+
+        <section id="apod-section" class="opacity-0 transition-opacity duration-700">
+            <h2 class="sr-only">Astronomy Picture of the Day</h2>
+            <!-- No image here anymore -->
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 NasaWebC</p>
+    <!-- Sidebar -->
+    <aside id="sidebar-apod"
+        class="fixed top-0 right-0 h-full w-80 bg-white shadow-lg border-l border-gray-300 transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto p-4 hover:translate-x-0">
+        <div class="flex flex-col space-y-4">
+            <h2 class="text-lg font-semibold text-blue-800 border-b pb-2">Astronomy Picture of the Day</h2>
+            <img id="sidebar-image" src="" alt="Astronomy Picture"
+                class="rounded-md shadow max-w-full object-cover border border-gray-200" />
+            <div>
+                <h3 id="sidebar-title" class="text-lg font-bold text-gray-900 mb-1"></h3>
+                <p id="sidebar-date" class="text-sm text-gray-500 mb-2"></p>
+                <p id="sidebar-explanation" class="text-sm text-gray-700 leading-relaxed text-justify"></p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="bg-gray-200 text-center py-4 mt-auto">
+        <p class="text-sm text-gray-600">&copy; 2025 NasaWebC</p>
     </footer>
 
     <script src="/js/main.js" defer></script>
+    <script src="/js/ui.js" defer></script>
 </body>
 
 </html>

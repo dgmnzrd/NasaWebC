@@ -2,14 +2,20 @@ body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
-    background: #f8f9fa;
+    background: #f4f6f8;
     color: #222;
 }
 
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
 header {
-    background-color: #001f3f;
+    background-color: #0b3d91;
     color: white;
-    padding: 1rem 2rem;
+    padding: 1rem 0;
 }
 
 header h1 {
@@ -19,13 +25,16 @@ header h1 {
 nav ul {
     list-style: none;
     padding: 0;
+    margin-top: 0.5rem;
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
 }
 
 nav a {
     color: #ffffff;
     text-decoration: none;
+    font-weight: 500;
 }
 
 nav a:hover {
@@ -33,22 +42,26 @@ nav a:hover {
 }
 
 main {
-    padding: 2rem;
+    padding: 2rem 1rem;
+}
+
+.intro {
+    margin-bottom: 3rem;
 }
 
 button {
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 1.2rem;
     font-size: 1rem;
     margin-top: 1rem;
     cursor: pointer;
-    background-color: #0074D9;
+    background-color: #0b3d91;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
 button:hover {
-    background-color: #005fa3;
+    background-color: #082c6c;
 }
 
 pre {
@@ -56,11 +69,38 @@ pre {
     padding: 1rem;
     margin-top: 1rem;
     white-space: pre-wrap;
+    border-radius: 4px;
+}
+
+#apod-section h2 {
+    margin-bottom: 1rem;
+}
+
+.apod-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .apod-grid {
+        flex-direction: row;
+    }
+}
+
+.apod-image-wrapper img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.apod-info {
+    flex: 1;
 }
 
 footer {
     text-align: center;
-    padding: 1rem;
+    padding: 1.5rem 0;
     background-color: #ddd;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
