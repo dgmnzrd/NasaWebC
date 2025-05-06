@@ -21,3 +21,8 @@ Thumbs.db
 # Librerías externas clonadas (opcional, si no quieres versionarlas)
 libs/cJSON/
 libs/mongoose/
+
+# Archivos y directorio de caché
+cache/
+*.ts
+*.json

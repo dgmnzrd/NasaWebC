@@ -4,41 +4,40 @@
 #include <string.h>
 #include <curl/curl.h>
 
-struct MemoryStruct {
+struct MemoryStruct
+{
     char *memory;
     size_t size;
 };
 
-static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
+{
     size_t realsize = size * nmemb;
     struct MemoryStruct *mem = (struct MemoryStruct *)userp;
 
     char *ptr = realloc(mem->memory, mem->size + realsize + 1);
-    if(ptr == NULL) return 0;
+    if (ptr == NULL)
+        return 0;
 
     mem->memory = ptr;
     memcpy(&(mem->memory[mem->size]), contents, realsize);
     mem->size += realsize;
-    mem->memory[mem->size] = 0;  // null-terminación segura
+    mem->memory[mem->size] = 0;
 
     return realsize;
 }
 
-char *fetch_apod_data(const char *api_key) {
+static char *perform_request(const char *url)
+{
     CURL *curl_handle;
     CURLcode res;
-    struct MemoryStruct chunk;
-
-    chunk.memory = malloc(1);  // inicia con memoria vacía
-    chunk.size = 0;
+    struct MemoryStruct chunk = {malloc(1), 0};
 
     curl_global_init(CURL_GLOBAL_ALL);
     curl_handle = curl_easy_init();
 
-    if (curl_handle) {
-        char url[256];
-        snprintf(url, sizeof(url), "https://api.nasa.gov/planetary/apod?api_key=%s", api_key);
-
+    if (curl_handle)
+    {
         curl_easy_setopt(curl_handle, CURLOPT_URL, url);
         curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
         curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void *)&chunk);
@@ -46,7 +45,8 @@ char *fetch_apod_data(const char *api_key) {
 
         res = curl_easy_perform(curl_handle);
 
-        if (res != CURLE_OK) {
+        if (res != CURLE_OK)
+        {
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
             free(chunk.memory);
             chunk.memory = NULL;
@@ -56,5 +56,19 @@ char *fetch_apod_data(const char *api_key) {
     }
 
     curl_global_cleanup();
-    return chunk.memory;  // debe liberarse en quien llama
+    return chunk.memory;
+}
+
+char *fetch_apod_data(const char *api_key)
+{
+    char url[256];
+    snprintf(url, sizeof(url), "https://api.nasa.gov/planetary/apod?api_key=%s", api_key);
+    return perform_request(url);
+}
+
+char *fetch_donki_data(const char *type, const char *start_date, const char *end_date, const char *api_key)
+{
+    char url[512];
+    snprintf(url, sizeof(url), "https://api.nasa.gov/DONKI/%s?startDate=%s&endDate=%s&api_key=%s", type, start_date, end_date, api_key);
+    return perform_request(url);
 }

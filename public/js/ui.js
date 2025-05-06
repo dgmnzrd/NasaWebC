@@ -25,11 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sidebarImage && modal && modalImage) {
         sidebarImage.addEventListener("click", () => {
             modalImage.src = sidebarImage.src;
-            modal.classList.remove("hidden");
+            modal.style.display = "flex";  // Mostrar modal
         });
 
         modal.addEventListener("click", () => {
-            modal.classList.add("hidden");
+            modal.style.display = "none";  // Ocultar modal
             modalImage.src = "";
         });
     }

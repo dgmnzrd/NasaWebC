@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/css/main.css" />
 </head>
 
-<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
+<body class="overflow-x-hidden bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
 
     <!-- Header (cargado dinámicamente) -->
     <div id="header"></div>
@@ -35,15 +35,65 @@
     <!-- Content + Sidebar wrapper -->
     <div class="relative flex-grow">
         <!-- Main content -->
-        <main class="container mx-auto px-4 py-10">
-            <section class="intro mb-12">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Explore space with real-time data</h2>
-                <p class="text-gray-700">This site uses NASA's API to display up-to-date space information.</p>
-            </section>
+        <!-- Main content area con grid de dashboard -->
+        <main class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <section id="apod-section" class="opacity-0 transition-opacity duration-700">
-                <h2 class="sr-only">Astronomy Picture of the Day</h2>
-            </section>
+            <!-- Columna izquierda: secciones de contenido -->
+            <div class="md:col-span-2 flex flex-col gap-6">
+
+                <!-- Introducción -->
+                <section class="intro bg-white p-6 rounded shadow border border-gray-200">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Explore space with real-time data</h2>
+                    <p class="text-gray-700">This site uses NASA's API to display up-to-date space information.</p>
+                </section>
+
+                <!-- Sección de eventos DONKI -->
+                <section id="donki-section" class="bg-blue-50 border border-blue-200 rounded-lg shadow-sm p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="text-lg font-semibold text-blue-800">🌌 Space Weather Events</h2>
+                        <div class="flex gap-2">
+                            <button data-type="CME"
+                                class="donki-btn text-xs font-medium bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">CME</button>
+                            <button data-type="CMEAnalysis"
+                                class="donki-btn text-xs font-medium bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">CME
+                                Analysis</button>
+                            <button data-type="FLR"
+                                class="donki-btn text-xs font-medium bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Solar
+                                Flares</button>
+                        </div>
+                    </div>
+
+                    <div id="donki-carousel"
+                        class="overflow-hidden relative h-[200px] transition-all duration-500 ease-in-out">
+                        <div id="donki-cards-wrapper"
+                            class="flex flex-col gap-2 transition-transform duration-700 ease-in-out">
+                            <div class="text-sm italic text-gray-500">Loading data...</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Columna derecha: espacio reservado para futuras tarjetas -->
+            <aside class="flex flex-col gap-6">
+
+                <!-- Widget futuro 1 -->
+                <div class="bg-white p-4 rounded shadow border border-gray-200">
+                    <h3 class="text-sm font-semibold text-gray-700 mb-2">🚀 Upcoming Missions</h3>
+                    <p class="text-xs text-gray-500">Coming soon: missions like Artemis, Europa Clipper, etc.</p>
+                </div>
+
+                <!-- Widget futuro 2 -->
+                <div class="bg-white p-4 rounded shadow border border-gray-200">
+                    <h3 class="text-sm font-semibold text-gray-700 mb-2">📡 Live Telemetry</h3>
+                    <p class="text-xs text-gray-500">Live data from satellites and observatories will appear here.</p>
+                </div>
+
+                <!-- Widget futuro 3 -->
+                <div class="bg-white p-4 rounded shadow border border-gray-200">
+                    <h3 class="text-sm font-semibold text-gray-700 mb-2">🌍 Earth Observations</h3>
+                    <p class="text-xs text-gray-500">Visuals and metrics on Earth from ISS and other satellites.</p>
+                </div>
+            </aside>
         </main>
 
         <!-- Sidebar -->
@@ -67,18 +117,19 @@
     </div>
 
     <!-- Modal para imagen ampliada -->
-    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[9999] hidden">
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[9999]"
+        style="display: none;">
         <img id="modalImage" src="" alt="Zoomed APOD"
-            class="max-w-full max-h-[90vh] rounded shadow-lg border-4 border-white" />
+            class="max-w-full max-h-[90vh] rounded shadow-lg border-4 border-white transition-all duration-200" />
     </div>
 
     <!-- Footer (cargado dinámicamente) -->
     <div id="footer"></div>
 
     <!-- Scripts -->
-    <script src="/js/main.js" defer></script>
     <script src="/js/ui.js" defer></script>
     <script src="/js/layout-loader.js" defer></script>
+    <script src="/js/main.js" defer></script>
 </body>
 
 </html>
