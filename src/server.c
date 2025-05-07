@@ -37,7 +37,7 @@ static void handle_request(struct mg_connection *c, int ev, void *ev_data) {
         const char *ts_file = CACHE_DIR "/cache_apod.ts";
         char *response = NULL;
 
-        if (has_24h_passed(ts_file)) {
+        if (has_day_changed(ts_file)) {
             response = fetch_apod_data(api_key);
             if (response && strchr(response, '{')) {
                 save_to_cache(cache_file, response);
@@ -75,7 +75,7 @@ static void handle_request(struct mg_connection *c, int ev, void *ev_data) {
 
         char *response = NULL;
 
-        if (has_24h_passed(ts_file)) {
+        if (has_day_changed(ts_file)) {
             response = fetch_donki_data(type, start, end, api_key);
             if (response && strchr(response, '[')) {
                 save_to_cache(cache_file, response);

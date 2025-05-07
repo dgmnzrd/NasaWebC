@@ -4,18 +4,27 @@
 #include <time.h>
 #include <string.h>
 
-#define SECONDS_IN_24H 86400
-
-int has_24h_passed(const char *timestamp_file) {
+int has_day_changed(const char *timestamp_file) {
     FILE *f = fopen(timestamp_file, "r");
-    if (!f) return 1; // Si no existe, forzar actualización
+    if (!f) return 1; // Si no hay timestamp, forzar actualización
 
     time_t last_time;
     fscanf(f, "%ld", &last_time);
     fclose(f);
 
+    struct tm last_tm, now_tm;
+    localtime_r(&last_time, &last_tm);
     time_t now = time(NULL);
-    return difftime(now, last_time) >= SECONDS_IN_24H;
+    localtime_r(&now, &now_tm);
+
+    // Comparamos año, mes y día
+    if (now_tm.tm_year != last_tm.tm_year ||
+        now_tm.tm_mon  != last_tm.tm_mon  ||
+        now_tm.tm_mday != last_tm.tm_mday) {
+        return 1; // Cambió el día
+    }
+
+    return 0; // Mismo día
 }
 
 void update_timestamp(const char *timestamp_file) {
