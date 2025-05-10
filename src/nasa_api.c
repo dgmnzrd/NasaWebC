@@ -72,3 +72,13 @@ char *fetch_donki_data(const char *type, const char *start_date, const char *end
     snprintf(url, sizeof(url), "https://api.nasa.gov/DONKI/%s?startDate=%s&endDate=%s&api_key=%s", type, start_date, end_date, api_key);
     return perform_request(url);
 }
+
+char *fetch_mars_photos(const char *earth_date, const char *api_key) {
+    char url[512];
+    snprintf(
+        url, sizeof(url),
+        "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=%s&api_key=%s",
+        earth_date, api_key
+    );
+    return perform_request(url);
+}

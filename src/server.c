@@ -94,8 +94,39 @@ static void handle_request(struct mg_connection *c, int ev, void *ev_data) {
         } else {
             mg_http_reply(c, 500, "Content-Type: text/plain\r\n", "Failed to load DONKI data");
         }
+    } else if (mg_strcmp(hm->uri, mg_str("/mars")) == 0) {
+        char date[16];
+        mg_http_get_var(&hm->query, "earth_date", date, sizeof(date));
+        if (!*date) {
+            mg_http_reply(c, 400, "Content-Type: text/plain\r\n", "Missing earth_date parameter");
+            return;
+        }
 
-    // === Static files ===
+        char cache_file[256], ts_file[256];
+        snprintf(cache_file, sizeof(cache_file), CACHE_DIR "/cache_mars_%s.json", date);
+        snprintf(ts_file, sizeof(ts_file), CACHE_DIR "/cache_mars_%s.ts", date);
+
+        char *response = NULL;
+
+        if (has_day_changed(ts_file)) {
+            response = fetch_mars_photos(date, api_key);
+            if (response && strchr(response, '{')) {
+                save_to_cache(cache_file, response);
+                update_timestamp(ts_file);
+            } else {
+                free(response);
+                response = load_from_cache(cache_file);
+            }
+        } else {
+            response = load_from_cache(cache_file);
+        }
+
+        if (response) {
+            mg_http_reply(c, 200, "Content-Type: application/json\r\n", "%s", response);
+            free(response);
+        } else {
+            mg_http_reply(c, 500, "Content-Type: text/plain\r\n", "Failed to load Mars Rover data");
+        }
     } else {
         struct mg_http_serve_opts opts = {.root_dir = "public"};
         mg_http_serve_dir(c, hm, &opts);

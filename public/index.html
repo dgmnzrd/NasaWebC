@@ -34,7 +34,6 @@
 
     <!-- Content + Sidebar wrapper -->
     <div class="relative flex-grow">
-        <!-- Main content -->
         <!-- Main content area con grid de dashboard -->
         <main class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -69,6 +68,14 @@
                             class="flex flex-col gap-2 transition-transform duration-700 ease-in-out">
                             <div class="text-sm italic text-gray-500">Loading data...</div>
                         </div>
+                    </div>
+                </section>
+
+                <!-- Nueva sección: Galería de Mars Rover -->
+                <section id="rover-gallery-section" class="bg-white border border-gray-200 rounded-lg shadow-sm p-4">
+                    <h2 class="text-lg font-semibold text-red-700 mb-3">📷 Mars Rover Photo Gallery</h2>
+                    <div id="rover-gallery">
+                        <div class="text-sm italic text-gray-500">Loading Mars Rover photos...</div>
                     </div>
                 </section>
             </div>
@@ -127,8 +134,8 @@
     <div id="footer"></div>
 
     <!-- Scripts -->
-    <script src="/js/ui.js" defer></script>
     <script src="/js/layout-loader.js" defer></script>
+    <script src="/js/ui.js" defer></script>
     <script src="/js/main.js" defer></script>
 </body>
 

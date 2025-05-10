@@ -122,10 +122,77 @@ footer {
     overflow: hidden;
 }
 
+#donki-carousel {
+    scroll-behavior: smooth;
+}
+
 .truncate-overflow {
     display: -webkit-box;
     -webkit-line-clamp: 4;
     line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.aspect-\[4\/3\] {
+    aspect-ratio: 4 / 3;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.pagination-container button {
+    width: 36px;
+    height: 36px;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500;
+    border-radius: 0.375rem; /* rounded-md */
+    border: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination-container button[data-page] {
+    background-color: #e5e7eb; /* gray-200 */
+    color: #374151; /* gray-700 */
+}
+
+.pagination-container button[data-page]:hover {
+    background-color: #3b82f6; /* blue-500 */
+    color: white;
+}
+
+.pagination-container button[data-page].active {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+}
+
+.pagination-container button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    background-color: #e5e7eb; /* gray-200 */
+    color: #1f2937; /* gray-800 */
+    transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+}
+
+.page-btn.active {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
 }
