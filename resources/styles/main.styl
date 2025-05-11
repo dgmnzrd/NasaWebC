@@ -1,13 +1,19 @@
+html, body
+    height 100%
+    margin 0
+    padding 0
+
 html
     overflow-x hidden
 
 body
     font-family 'Segoe UI', sans-serif
-    margin 0
-    padding 0
     background #f4f6f8
     color #222
     overflow-x hidden
+    display grid
+    grid-template-rows auto 1fr auto
+    min-height 100vh
 
 .container
     max-width 960px
@@ -66,7 +72,6 @@ pre
     border-radius 4px
 
 #apod-section h2
-    
 
 .apod-grid
     display flex
@@ -89,7 +94,7 @@ footer
     text-align center
     padding 1.5rem 0
     background-color #ddd
-    margin-top 3rem
+    margin-top auto
 
 .donki-card
     background-color white
@@ -164,3 +169,10 @@ footer
 .page-btn.active
     background-color #2563eb
     color white
+    
+#sidebar-apod.sidebar-fixed
+    position fixed !important
+    top 0 !important
+    right 0 !important
+    height 100vh !important
+    z-index 50

@@ -1,14 +1,22 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 html {
     overflow-x: hidden;
 }
 
 body {
     font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
     background: #f4f6f8;
     color: #222;
     overflow-x: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
 }
 
 .container {
@@ -104,7 +112,7 @@ footer {
     text-align: center;
     padding: 1.5rem 0;
     background-color: #ddd;
-    margin-top: 3rem;
+    margin-top: auto;
 }
 
 .donki-card {
@@ -192,4 +200,12 @@ footer {
 .page-btn.active {
     background-color: #2563eb;
     color: #fff;
+}
+
+#sidebar-apod.sidebar-fixed {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    height: 100vh !important;
+    z-index: 50;
 }

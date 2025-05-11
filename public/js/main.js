@@ -225,6 +225,53 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     fetchRoverPhotos();
+
+    // === CARGA DE VIDEOS NASA DESDE /videos ===
+    // === CARGA DE VIDEOS NASA DESDE /videos ===
+const loadVideoPreviews = async () => {
+    const container = document.getElementById("video-list");
+    if (!container) return;
+
+    container.innerHTML = '<p class="text-xs italic text-gray-500">Loading videos...</p>';
+
+    try {
+        const res = await fetch("/search?q=space");
+        if (!res.ok) throw new Error("Failed");
+
+        const data = await res.json();
+        const items = data.collection?.items || [];
+
+        // ✅ Filtra solo los que NO tienen espacios en el nasa_id
+        const filtered = items.filter(item => {
+            const id = item.data?.[0]?.nasa_id || "";
+            return id && !id.includes(" ");
+        });
+
+        if (!filtered.length) {
+            container.innerHTML = '<p class="text-xs italic text-red-500">No videos with valid IDs found.</p>';
+            return;
+        }
+
+        container.innerHTML = filtered.slice(0, 6).map(item => {
+            const preview = item.links?.find(l => l.render === "image")?.href;
+            const title = item.data?.[0]?.title || "Untitled";
+            const id = item.data?.[0]?.nasa_id || "";
+
+            return `
+                <div onclick="window.location.href='/video.html?id=${encodeURIComponent(id)}'"
+                    class="cursor-pointer bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition">
+                    <img src="${preview}" alt="${title}" class="w-full h-40 object-cover" />
+                    <div class="p-2 text-sm font-medium text-gray-700 truncate">${title}</div>
+                </div>
+            `;
+        }).join("");
+
+    } catch (err) {
+        container.innerHTML = '<p class="text-xs italic text-red-500">Error loading video previews.</p>';
+    }
+};
+
+    loadVideoPreviews();
 });
 
 // Desactiva scroll horizontal si se desborda

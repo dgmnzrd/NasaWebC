@@ -33,4 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
             modalImage.src = "";
         });
     }
+
+    const headerEl = document.getElementById('header');
+    const sidebarEl = document.getElementById('sidebar-apod');
+
+    if (headerEl && sidebarEl) {
+        // Observamos el header con threshold = 1 para saber cuando deja de verse COMPLETO
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.intersectionRatio < 1) {
+                // header ya no está 100% visible → fijamos el sidebar
+                sidebarEl.classList.remove('absolute');
+                sidebarEl.classList.add('sidebar-fixed');
+            } else {
+                // header completamente visible → volvemos al comportamiento normal
+                sidebarEl.classList.add('absolute');
+                sidebarEl.classList.remove('sidebar-fixed');
+            }
+        }, { threshold: [1] });
+
+        observer.observe(headerEl);
+    }
 });
