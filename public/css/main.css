@@ -19,7 +19,7 @@ body {
 
 header {
     background-color: #0b3d91;
-    color: white;
+    color: #fff;
     padding: 1rem 0;
 }
 
@@ -37,7 +37,7 @@ nav ul {
 }
 
 nav a {
-    color: #ffffff;
+    color: #fff;
     text-decoration: none;
     font-weight: 500;
 }
@@ -60,7 +60,7 @@ button {
     margin-top: 1rem;
     cursor: pointer;
     background-color: #0b3d91;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 5px;
 }
@@ -77,10 +77,7 @@ pre {
     border-radius: 4px;
 }
 
-#apod-section h2 {
-    margin-bottom: 1rem;
-}
-
+#apod-section h2,
 .apod-grid {
     display: flex;
     flex-direction: column;
@@ -111,8 +108,8 @@ footer {
 }
 
 .donki-card {
-    background-color: white;
-    border: 1px solid #d1d5db; /* gray-300 */
+    background-color: #fff;
+    border: 1px solid #d1d5db;
     border-radius: 0.5rem;
     padding: 0.75rem;
     font-size: 0.8rem;
@@ -135,7 +132,7 @@ footer {
 }
 
 .aspect-\[4\/3\] {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4/3;
 }
 
 .pagination-container {
@@ -149,26 +146,26 @@ footer {
 .pagination-container button {
     width: 36px;
     height: 36px;
-    font-size: 0.875rem; /* text-sm */
+    font-size: 0.875rem;
     font-weight: 500;
-    border-radius: 0.375rem; /* rounded-md */
+    border-radius: 0.375rem;
     border: none;
     transition: background-color 0.2s, color 0.2s;
 }
 
 .pagination-container button[data-page] {
-    background-color: #e5e7eb; /* gray-200 */
-    color: #374151; /* gray-700 */
+    background-color: #e5e7eb;
+    color: #374151;
 }
 
 .pagination-container button[data-page]:hover {
-    background-color: #3b82f6; /* blue-500 */
-    color: white;
+    background-color: #3b82f6;
+    color: #fff;
 }
 
 .pagination-container button[data-page].active {
-    background-color: #2563eb; /* blue-600 */
-    color: white;
+    background-color: #2563eb;
+    color: #fff;
 }
 
 .pagination-container button:disabled {
@@ -182,17 +179,17 @@ footer {
     font-size: 0.875rem;
     font-weight: 500;
     border-radius: 0.375rem;
-    background-color: #e5e7eb; /* gray-200 */
-    color: #1f2937; /* gray-800 */
+    background-color: #e5e7eb;
+    color: #1f2937;
     transition: all 0.2s ease;
 }
 
 .page-btn:hover {
-    background-color: #2563eb; /* blue-600 */
-    color: white;
+    background-color: #2563eb;
+    color: #fff;
 }
 
 .page-btn.active {
-    background-color: #2563eb; /* blue-600 */
-    color: white;
+    background-color: #2563eb;
+    color: #fff;
 }
